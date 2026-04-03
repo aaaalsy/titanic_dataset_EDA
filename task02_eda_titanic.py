@@ -1,7 +1,4 @@
-"""
-Task 02: Data Cleaning & Exploratory Data Analysis (EDA) — Titanic Dataset
-Dataset: Titanic (built-in via seaborn or CSV)
-"""
+
 
 import pandas as pd
 import numpy as np
@@ -11,7 +8,7 @@ import seaborn as sns
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── 1. Load Dataset ──────────────────────────────────────────────────────────
+# 1. Load Dataset 
 print("=" * 60)
 print("TASK 02 — Titanic EDA")
 print("=" * 60)
@@ -20,7 +17,6 @@ try:
     df = sns.load_dataset('titanic')
     print("Loaded Titanic dataset from seaborn.")
 except Exception:
-    # Fallback: create a representative mock dataset
     np.random.seed(0)
     n = 891
     df = pd.DataFrame({
@@ -39,7 +35,7 @@ except Exception:
     })
     print("Using simulated Titanic-like dataset.")
 
-# ── 2. Data Cleaning ─────────────────────────────────────────────────────────
+#  2. Data Cleaning
 print("\n── Raw Shape:", df.shape)
 print("── Missing values:\n", df.isnull().sum()[df.isnull().sum() > 0])
 
@@ -56,11 +52,10 @@ df.drop_duplicates(inplace=True)
 print("\n── Cleaned Shape:", df.shape)
 print("── Null count after cleaning:", df.isnull().sum().sum())
 
-# Save cleaned CSV
 df.to_csv('titanic_cleaned.csv', index=False)
 print("\nCleaned dataset saved → titanic_cleaned.csv")
 
-# ── 3. Summary Statistics ─────────────────────────────────────────────────────
+# 3. Summary Statistics 
 print("\n── Descriptive Statistics:")
 print(df[['age', 'fare', 'survived']].describe().round(2))
 
@@ -69,7 +64,7 @@ print(f"\n── Overall Survival Rate: {survival_rate:.1f}%")
 print("── Survival by Gender:\n", df.groupby('sex')['survived'].mean().mul(100).round(1))
 print("── Survival by Class:\n",  df.groupby('pclass')['survived'].mean().mul(100).round(1))
 
-# ── 4. Visualisations ────────────────────────────────────────────────────────
+#  4. Visualisations 
 BG = '#1e1e2e'
 plt.rcParams.update({'figure.facecolor': BG, 'axes.facecolor': BG,
                      'text.color': 'white', 'axes.labelcolor': 'white',
